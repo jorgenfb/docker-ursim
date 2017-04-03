@@ -1,0 +1,62 @@
+{
+    "release_version": "3.3.4.310", 
+    "modules": [
+        {
+            "build_date": "1481034680000", 
+            "artifact_version": "3.3.4.310", 
+            "name": "polyscope"
+        }, 
+        {
+            "build_date": "1481034011000", 
+            "artifact_version": "3.3.4.310", 
+            "name": "controller"
+        }, 
+        {
+            "build_date": "1476264040000", 
+            "artifact_version": "3.3.3-69", 
+            "name": "safe-a"
+        }, 
+        {
+            "build_date": "1476264105000", 
+            "artifact_version": "3.3.3-41", 
+            "name": "safe-b"
+        }, 
+        {
+            "build_date": "1457700688000", 
+            "artifact_version": "3.3.0.24", 
+            "name": "euromap67"
+        }, 
+        {
+            "build_date": "1476266323000", 
+            "artifact_version": "3.3.3-22", 
+            "name": "joint"
+        }, 
+        {
+            "build_date": "1457702067000", 
+            "artifact_version": "3.3.0.12", 
+            "name": "jointbootloader"
+        }, 
+        {
+            "build_date": "1463565825000", 
+            "artifact_version": "3.3.0.13", 
+            "name": "joint-selftest"
+        }, 
+        {
+            "build_date": "1457703158000", 
+            "artifact_version": "3.3.0.11", 
+            "name": "screen"
+        }, 
+        {
+            "build_date": "1457703222000", 
+            "artifact_version": "3.3.0.13", 
+            "name": "screenbootloader"
+        }, 
+        {
+            "build_date": "1457703318000", 
+            "artifact_version": "3.3.0.10", 
+            "name": "tool-io-board"
+        }
+    ], 
+    "description": "", 
+    "build_date": "2016-12-06"
+}

@@ -1,0 +1,67 @@
+#
+# RobotType: UR 5
+# NOTE: The SafetyParameters section is protected by a CRC checksum, please use the supplied tool "update_urcontrol_crc.py" in a terminal.
+
+## SafetyParameters ##
+
+[Hardware]
+robot_type = 1  # 1=UR5, 2=UR10
+hardware_id = 255
+
+[DH]
+a = [0.00000, -0.42500, -0.39225,  0.00000,  0.00000,  0.0000]
+d = [0.089159,  0.00000,  0.00000,  0.10915,  0.09465,  0.0823]
+alpha = [ 1.570796327, 0, 0, 1.570796327, -1.570796327, 0 ]
+q_home_offset = [0, -1.570796327, 0, -1.570796327, 0, 0]
+joint_direction = [1, 1, -1, 1, 1, 1]
+
+[Link]
+mass = [3.7000, 8.3930, 2.33, 1.2190, 1.2190, 0.1879]
+center_of_mass = [ [0, -0.02561, 0.00193], [0.2125, 0, 0.11336], [0.15, 0.0, 0.0265], [0, -0.0018, 0.01634], [0, 0.0018,0.01634], [0, 0, -0.001159] ]
+
+[Joint]
+joint = ['joint_size3_CB3_rev1.conf', 'joint_size3_CB3_rev1.conf', 'joint_size3_CB3_rev1.conf', 'joint_size1_CB3_rev1.conf', 'joint_size1_CB3_rev1.conf', 'joint_size1_CB3_rev1.conf']
+
+## SafetyParameters ##
+
+[Checksum]
+RobotConfig = 3733819797
+
+[Joint]
+v_joint_default = 1.0471975511965976
+a_joint_default = 1.3962634015954636
+
+[Tool]
+tcp_pose = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+tcp_payload_mass = 0
+v_tool_default = 0.25
+a_tool_default = 1.2
+eqradius = 0.25
+
+[Link]
+inertia_matrix = [ [0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0] ]
+
+gravity = [0, 0, 9.82] # upright mounting
+
+[Units]
+MASTER_POWERBUS_VOLTAGE_UNITS_PER_VOLT = 445.7457
+MASTER_POWERBUS_CURRENT_UNITS_PER_AMP = 222.9116 # [V/A] - 215 / 3.3V * 0.02244898V/A - - - Volt_ADC/Ampere = 0,033 * 10k /14,7k = 0.02244898V/A
+MASTER_POWERBUS_CURRENT_UNITS_OFFSET = 16887.24 # [V/A] - 215 / 3.3V * (2.5V * 10 / 14.7)
+MASTER_TEMP_UNITS_PER_DEGREE = 62.0606
+MASTER_TEMP_UNITS_OFFSET = 4210.1915
+MASTER_IO_CURRENT_UNITS_PER_AMP = 6454.3030 # CB2: [ADC_measurement / A] (32768 * 0.65) / 3.3 = 6454.3030, CB1: 16880.4848
+MASTER_5V_VOLTAGE_UNITS_PER_VOLT = 4964.8485
+TOOL_ACCELEROMETER_UNITS_PER_M_S_S = 667.37 # Converted from G's to m/s². 6553.6/9.82,
+TOOL_ACCELEROMETER_OFFSET_UNITS = 32768
+
+[Config]
+# masterboard_version, 0 = Zero-series, 1 = One-series, 3 = Pause function enabled, 4 = first cb2 version, 5 = ur10 support added, 6 = CB3
+masterboard_version = 6
+
+[Hardware]
+controller_box_type = 4 # 1=CB1, 2=CB2UR5, 3=CB2UR10, 4=CB3UR5, 5=CB3UR10
+robot_sub_type = 2 # 1 = CB1 and CB2 robot, 2 = CB3 robot
+
+[Force]
+force_params = force_control_UR5_CB3_rev1.conf
+
