@@ -4,41 +4,46 @@ LABEL maintainer="Jørgen Borgesen"
 
 # Install dependencies
 RUN apt-get update && apt-get install -y \
-  # Install libraries to run 32 bits software on 64 bits environment
-  lib32gcc1 \
-  lib32stdc++6 \
-  libc6-i386 \
-  # Install java version 6 required by ursim
-  openjdk-6-jre
-  #libcurl3
+  libcurl3 libjava3d-* ttf-dejavu* \
+  fonts-ipafont fonts-baekmuk fonts-nanum fonts-arphic-uming fonts-arphic-ukai \
+  default-jre\
+  libc6-i386  lib32stdc++6 lib32gcc1 xvfb
+
 
 # Define commonly used JAVA_HOME variable
-ENV JAVA_HOME /usr/lib/jvm/java-6-openjdk-amd64
+ENV JAVA_HOME /usr/lib/jvm/default-java
 
 # Define URSIM version to use
-ENV UR_VERSION 3.3.4.310
+ENV UR_VERSION 3.7.2.40245
 
 # Define default robot type
-ENV ROBOT_TYPE UR10
+ARG ROBOT_TYPE=UR10
+ENV ROBOT_TYPE "$ROBOT_TYPE"
 
 # Expose primary, secondary and realtime ports
 EXPOSE 30001
 EXPOSE 30002
 EXPOSE 30003
+EXPOSE 30004
 
 # Copy URSIM directories
-COPY ursim-$UR_VERSION/.urcontrol         /root/ursim-current/.urcontrol
+COPY ursim-$UR_VERSION/.urcontrol         /root/ursim-current/.urcontrol/
+COPY "ursim-$UR_VERSION/.urcontrol/urcontrol.conf.$ROBOT_TYPE"  /root/ursim-current/.urcontrol/urcontrol.conf
 COPY ursim-$UR_VERSION/programs.UR10      /root/ursim-current/programs.UR10
 COPY ursim-$UR_VERSION/programs.UR5       /root/ursim-current/programs.UR5
 COPY ursim-$UR_VERSION/programs.UR3       /root/ursim-current/programs.UR3
 COPY ursim-$UR_VERSION/ursim-dependencies/*amd64.deb /root/ursim-current/ursim-dependencies/
 
-# Copy URSIM files
+
 COPY \
+  ursim-$UR_VERSION/filesys \
   ursim-$UR_VERSION/URControl \
   ursim-$UR_VERSION/ur-serial.* \
+  ursim-$UR_VERSION/*.sh \
   start.sh \
   /root/ursim-current/
+
+COPY ursim-$UR_VERSION/GUI /root/ursim-current
 
 # Define working directory.
 WORKDIR /root/ursim-current
@@ -50,6 +55,4 @@ RUN dpkg -i ursim-dependencies/*amd64.deb
 RUN rm -rf /var/lib/apt/lists/*
 
 # Define default command.
-CMD ["/root/ursim-current/start.sh"]
-
-
+CMD ["/root/ursim-current/start.sh", "$ROBOT_TYPE"]

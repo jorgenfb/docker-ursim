@@ -2,7 +2,6 @@
 .cache
 .java
 .urcaps
-*/GUI
 */UR_Logo_24x24.png
 */flightreports
 */histogram.properties
@@ -10,9 +9,4 @@
 */log_history.txt
 */programs
 */ur-serial
-*/start*.sh
-*/stop*.sh
 *.log
-
-
-
