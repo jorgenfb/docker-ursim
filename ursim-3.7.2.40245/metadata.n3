@@ -1,0 +1,9 @@
+<urn:maven/artifact#com.ur.release:package-g3:3.7.2.40245::tar.gz>
+    <urn:com/ur/metadata#buildNumber> "40245" ;
+    <urn:com/ur/metadata#buildDate> "2018-10-05" ;
+    <urn:com/ur/metadata#marketingVersion> "3.7.2.40245" ;
+    <urn:com/ur/metadata#dependencies> "
+robot-installer-g3 = 1.5.0
+urcontrol-g3 = 7.0.25
+polyscope-g3 = 7.36.101
+" .

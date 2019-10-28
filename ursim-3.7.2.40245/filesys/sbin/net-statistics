@@ -1,0 +1,94 @@
+#!/usr/bin/perl
+
+my $interface = "eth0";
+my $isDhcp = 0;
+my $isStatic = 0;
+
+open(INTF,"</etc/network/interfaces");
+while($line = <INTF>) {
+    chomp $line;
+    if ($line =~/eth0/) {
+		$interface = "eth0"
+	}
+    if ($line =~ /$interface.*dhcp/) {
+        $isDhcp = 1;
+    } elsif ($line =~ /$interface.*static/) {
+        $isStatic = 1;
+    }
+}
+close INTF;
+
+my $interface_operstate = `cat /sys/class/net/$interface/operstate`;
+my @ifconfig = split(/\n/,`/sbin/ifconfig $interface 2>&1`);
+
+my $addr = "";
+my $mask = "";
+my $ifconfig_str = join(" ", @ifconfig);
+my $isNetDown = 1;
+
+
+if ($interface_operstate =~ /up/) {
+    $isNetDown = 0;
+}
+
+if ($isDhcp) {
+    print "Mode:dhcp\n";
+} elsif ($isStatic) {
+    print "Mode:static\n";
+} else {
+    print "Mode:disabled\n";
+}
+
+if ($isNetDown) {
+    print "Net down\n";
+} else {
+    print "Net up\n";
+}
+
+
+foreach $line (@ifconfig) {
+    chomp $line;
+    if($line =~ /inet addr/) {
+	$addr = $line;
+	$addr =~ s/.*inet addr:([^ ]*).*/$1/;
+    }
+    if($line =~ /Mask/) {
+	$mask = $line;
+	$mask =~ s/.*Mask:([^ ]*).*/$1/;
+    }
+}
+
+my @route = split(/\n/,`/sbin/route -n`);
+my $gateway = "";
+foreach $line (@route) {
+    chomp $line;
+    if($line =~ /^0.0.0.0 /) {
+        $gateway = $line;
+        $gateway =~ s/^0.0.0.0[ ]*([^ ]*).*/$1/;
+    }
+}
+
+open RES, "</etc/resolv.conf";
+my @nameservers;
+while($line = <RES>) {
+    chomp $line;
+    if($line =~ /nameserver/) {
+        my $name=$line;
+        $name =~ s/nameserver //;
+        push @nameservers, $name;
+    }
+}
+close RES;
+
+my @hostname = split(/\n/, `hostname`);
+
+print "Address:$addr\n";
+print "Mask:$mask\n";
+print "Gateway:$gateway\n";
+print "nameserver1:" . $nameservers[0] . "\n";
+print "nameserver2:" . $nameservers[1] . "\n";
+print "Hostname:$hostname[0]\n";
+
+
+
+
