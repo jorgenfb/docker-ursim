@@ -28,7 +28,6 @@ EXPOSE 30004
 
 # Copy URSIM directories
 COPY ursim-$UR_VERSION/.urcontrol         /root/ursim-current/.urcontrol/
-COPY "ursim-$UR_VERSION/.urcontrol/urcontrol.conf.$ROBOT_TYPE"  /root/ursim-current/.urcontrol/urcontrol.conf
 COPY ursim-$UR_VERSION/programs.UR10      /root/ursim-current/programs.UR10
 COPY ursim-$UR_VERSION/programs.UR5       /root/ursim-current/programs.UR5
 COPY ursim-$UR_VERSION/programs.UR3       /root/ursim-current/programs.UR3
@@ -41,6 +40,7 @@ COPY \
   ursim-$UR_VERSION/ur-serial.* \
   ursim-$UR_VERSION/*.sh \
   start.sh \
+  waitforportAndUnlock.sh \
   /root/ursim-current/
 
 COPY ursim-$UR_VERSION/GUI /root/ursim-current

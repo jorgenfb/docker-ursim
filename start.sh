@@ -11,10 +11,12 @@ CLASSPATH=$(echo $URSIM_ROOT/lib/*.jar | tr ' ' ':')
 ./stopurcontrol.sh
 #./starturcontrol.sh
 
-ROBOT_TYPE="UR10"
+
 
 #Setting up the configuration files according to the robot type
-
+#urcontrol.conf
+rm -f $URSIM_ROOT/.urcontrol/urcontrol.conf
+ln -s $URSIM_ROOT/.urcontrol/urcontrol.conf.$ROBOT_TYPE $URSIM_ROOT/.urcontrol/urcontrol.conf
 
 #ur-serial
 rm -f $URSIM_ROOT/ur-serial
@@ -42,5 +44,6 @@ ln -s $URSIM_ROOT/programs.$ROBOT_TYPE $URSIM_ROOT/programs
 #rm -f $URSIM_ROOT/programs
 
 #popd &>/dev/null
-
+./waitforportAndUnlock.sh &
 ./starturcontrol.sh
+#echo "confirm user safety parameters" | nc localhost 30001
